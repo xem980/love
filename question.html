@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>คำถาม 💖</title>
+<style>
+body {background:#ffe4ec; text-align:center; padding-top:80px;}
+img {width:250px; border-radius:20px;}
+button {padding:12px 25px; font-size:18px; margin:10px; border:none; border-radius:15px;}
+#yes {background:#ff4d6d; color:white;}
+</style>
+</head>
+
+<body>
+
+<h1>พี่จะอยู่กับผมตลอดไปมั้ย 💖</h1>
+
+<img src="https://tenor.com/th/view/kawaii-cute-so-cute-aww-love-gif-4358250317958031480">
+<br>
+
+<button id="yes">Yes 💕</button>
+<button id="no">No 😢</button>
+
+<script>
+let yes=document.getElementById("yes");
+let no=document.getElementById("no");
+
+// YES
+yes.onclick=()=>{
+  window.location.href="final.html";
+};
+
+// NO หนี
+no.onmouseover=()=>{
+  no.style.position="absolute";
+  no.style.left=Math.random()*80+"vw";
+  no.style.top=Math.random()*80+"vh";
+};
+</script>
+
+</body>
+</html>
