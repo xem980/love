@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>เกมหัวใจ 💖</title>
+
+<style>
+body { margin:0; overflow:hidden; background:linear-gradient(to right,#ffdde1,#ee9ca7); text-align:center; color:white; font-family:Arial;}
+h1 { margin-top:20px;}
+#score { font-size:22px;}
+
+.heart { position:absolute; font-size:30px; cursor:pointer; animation:float 4s linear;}
+.boss { position:absolute; font-size:80px; cursor:pointer; animation:float 5s linear;}
+
+@keyframes float {
+  from { transform: translateY(100vh);}
+  to { transform: translateY(-10vh);}
+}
+
+.winHeart {
+  position:absolute;
+  animation:explode 2s forwards;
+}
+
+@keyframes explode {
+  from { transform:scale(0); opacity:1;}
+  to { transform:scale(2) translateY(-200px); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<h1>พี่ต้องกดหัวใจให้ครบ 10 ดวงนะ 💖</h1>
+<p id="score">0 / 10</p>
+
+<img src="yourphoto1.jpg" style="width:150px; border-radius:20px; margin-top:30px;">
+<audio autoplay loop>
+  <source src="music.mp3">
+</audio>
+
+<script>
+let count = 0;
+let target = 10;
+let bossSpawned = false;
+
+setInterval(()=>{document.querySelector("audio").play();},1000);
+
+// สร้างหัวใจ
+let heartInterval = setInterval(()=>{
+  let h=document.createElement("div");
+  h.innerHTML="💗";
+  h.className="heart";
+  h.style.left=Math.random()*90+"vw";
+
+  h.onclick=()=>{
+    count++;
+    document.getElementById("score").innerText=count+" / "+target;
+    h.remove();
+
+    if(count>=7 && !bossSpawned){
+      spawnBoss();
+      bossSpawned=true;
+    }
+
+    if(count>=target){
+      winGame();
+    }
+  };
+
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),4000);
+
+},800);
+
+// บอส
+function spawnBoss(){
+  let b=document.createElement("div");
+  b.innerHTML="💖";
+  b.className="boss";
+  b.style.left=Math.random()*80+"vw";
+
+  b.onclick=()=>{
+    winGame(true);
+    b.remove();
+  };
+
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(),6000);
+}
+
+// เอฟเฟกต์
+function heartExplosion(){
+  for(let i=0;i<100;i++){
+    let h=document.createElement("div");
+    h.innerHTML="💖";
+    h.className="winHeart";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top=Math.random()*100+"vh";
+    h.style.fontSize=(20+Math.random()*40)+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),2000);
+  }
+}
+
+// ชนะ
+function winGame(fromBoss=false){
+  clearInterval(heartInterval);
+  heartExplosion();
+
+  setTimeout(()=>{
+    window.location.href="cinema.html";
+  },2000);
+}
+</script>
+
+</body>
+</html>
