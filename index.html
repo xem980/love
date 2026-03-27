@@ -53,11 +53,8 @@ let heartInterval = setInterval(()=>{
   h.className="heart";
   h.style.left=Math.random()*90+"vw";
 
-  h.onclick=()=>{
-    count++;
-    document.getElementById("score").innerText=count+" / "+target;
-    h.remove();
-
+  h.addEventListener("click", clickHeart);
+h.addEventListener("touchstart", clickHeart);
     if(count>=7 && !bossSpawned){
       spawnBoss();
       bossSpawned=true;
